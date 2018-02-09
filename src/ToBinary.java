@@ -4,7 +4,10 @@ public class ToBinary {
     int result1 = 0;
     //main method to decide if the incoming is hex or decimal
     public void decide(String incomingNumber) {
-    		if(incomingNumber.indexOf("0x") == -1) {
+    		if(incomingNumber.length() == 0 ) {
+    			System.out.println("Enter number...");
+    		}
+    		else if(incomingNumber.indexOf("0x") == -1) {
     			this.decToBinaryString(incomingNumber);
     		} else {
     			this.convertStringHex(incomingNumber);

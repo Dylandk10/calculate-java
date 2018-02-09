@@ -1,10 +1,9 @@
-import java.awt.TextField;
+import javafx.scene.control.TextField;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
-import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.geometry.Insets;
@@ -26,8 +25,6 @@ public class App extends Application{
 		rootNode.setAlignment(Pos.CENTER);
 		
 		Scene myScene = new Scene(rootNode, 500, 500);
-		
-		rootNode.add(new Label("Text Field:"), 0, 0);
 		TextField inputField = new TextField();
 		
 		Button btn = new Button();
@@ -40,8 +37,23 @@ public class App extends Application{
 				
 			}
 		});
+		//number buttons
+		Button button1 = new Button();
+		Button button2 = new Button();
+		Button button3 = new Button();
+		Button button4 = new Button();
+		button1.setText("1");
+		button2.setText("2");
+		button3.setText("3");
+		button4.setText("4");
+		//adding to rootnode
 		rootNode.add(btn, 0, 2);
-		//rootNode.add(inputField, 0, 1);
+		rootNode.add(new Label("Enter hexidecimal data:"), 0, 0);
+		rootNode.add(inputField, 0, 1);
+		rootNode.add(button1, 1, 0);
+		rootNode.add(button2, 2, 0);
+		rootNode.add(button3, 1, 1);
+		rootNode.add(button4, 2, 1);
 		primaryStage.setScene(myScene);
 		primaryStage.show();
 	}
