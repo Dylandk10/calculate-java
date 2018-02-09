@@ -20,7 +20,7 @@ public class App extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("Application");
 		GridPane rootNode = new GridPane();
-		rootNode.setPadding( new Insets(15, 0, 0, 0) );
+		rootNode.setPadding(new Insets(15, 0, 0, 0) );
 		rootNode.setHgap(5);
 		rootNode.setVgap(5);
 		rootNode.setAlignment(Pos.CENTER);
@@ -29,22 +29,19 @@ public class App extends Application{
 		
 		rootNode.add(new Label("Text Field:"), 0, 0);
 		TextField inputField = new TextField();
-		//rootNode.add(inputField, 0, 1);
 		
 		Button btn = new Button();
 		btn.setText("Launch calc-app");
-		btn.setOnAction(new EventHandler<ActionEvent>() 
-		{
+		btn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void handle(ActionEvent arg0) 
-			{
+			public void handle(ActionEvent arg0) {
 				ToBinary toBinary = new ToBinary();
 				toBinary.decide(inputField.getText());
 				
 			}
 		});
 		rootNode.add(btn, 0, 2);
-		
+		//rootNode.add(inputField, 0, 1);
 		primaryStage.setScene(myScene);
 		primaryStage.show();
 	}
