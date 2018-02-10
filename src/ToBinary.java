@@ -11,7 +11,7 @@ public class ToBinary {
     	Pattern pattern = Pattern.compile(reg);
     	Matcher matcher = pattern.matcher(incomingNumber);
     		if(incomingNumber.length() == 0 || matcher.find()) {
-    			System.out.println("Enter number...");
+    			System.out.println("Must enter a valid hexidecimal or decical number...");
     		}
     		else if(incomingNumber.indexOf("0x") == -1) {
     			this.decToBinaryString(incomingNumber);

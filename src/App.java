@@ -26,7 +26,7 @@ public class App extends Application{
 		
 		Scene myScene = new Scene(rootNode, 500, 500);
 		TextField inputField = new TextField();
-		
+		Label input = new Label();
 		Button btn = new Button();
 		btn.setText("Launch calc-app");
 		//launches app with button input
@@ -58,6 +58,7 @@ public class App extends Application{
 			public void handle(ActionEvent arg0) {
 				String value = "1";
 				buttonHandler.addResult(value);
+				input.setText(buttonHandler.returnResult());
 			}
 			
 		});
@@ -66,6 +67,7 @@ public class App extends Application{
 			public void handle(ActionEvent arg0) {
 				String value = "2";
 				buttonHandler.addResult(value);
+				input.setText(buttonHandler.returnResult());
 			}	
 		});
 		button3.setOnAction(new EventHandler<ActionEvent>() {
@@ -73,6 +75,7 @@ public class App extends Application{
 			public void handle(ActionEvent arg0) {
 				String value = "3";
 				buttonHandler.addResult(value);
+				input.setText(buttonHandler.returnResult());
 			}
 		});
 		button4.setOnAction(new EventHandler<ActionEvent>() {
@@ -80,6 +83,7 @@ public class App extends Application{
 			public void handle(ActionEvent arg0) {
 				String value = "4";
 				buttonHandler.addResult(value);
+				input.setText(buttonHandler.returnResult());
 			}
 		});
 		button5.setOnAction(new EventHandler<ActionEvent>() {
@@ -87,6 +91,7 @@ public class App extends Application{
 			public void handle(ActionEvent arg0) {
 				String value = "5";
 				buttonHandler.addResult(value);
+				input.setText(buttonHandler.returnResult());
 			}
 		});
 		button6.setOnAction(new EventHandler<ActionEvent>() {
@@ -94,12 +99,13 @@ public class App extends Application{
 			public void handle(ActionEvent arg0) {
 				String value = "6";
 				buttonHandler.addResult(value);
+				input.setText(buttonHandler.returnResult());
 			}
 		});
 		
 		//adding to rootnode
 		rootNode.add(btn, 0, 2);
-		rootNode.add(new Label("Enter hexidecimal data:"), 0, 0);
+		rootNode.add(input, 0, 0);
 		rootNode.add(inputField, 0, 1);
 		rootNode.add(button1, 1, 0);
 		rootNode.add(button2, 2, 0);
