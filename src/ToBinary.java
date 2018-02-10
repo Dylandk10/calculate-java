@@ -1,10 +1,16 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ToBinary {
     String result = "";
     int result1 = 0;
     //main method to decide if the incoming is hex or decimal
     public void decide(String incomingNumber) {
-    		if(incomingNumber.length() == 0 ) {
+    	//regex to ensure that only A-F can be used exept for x.
+    	final String reg = "[g-zG-Z&&[^xX]]+";
+    	Pattern pattern = Pattern.compile(reg);
+    	Matcher matcher = pattern.matcher(incomingNumber);
+    		if(incomingNumber.length() == 0 || matcher.find()) {
     			System.out.println("Enter number...");
     		}
     		else if(incomingNumber.indexOf("0x") == -1) {
