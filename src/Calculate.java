@@ -4,16 +4,17 @@ public class Calculate {
 	String numberTwo = "";
 	int recentTotal = 0;
 	String operator = "";
-	public void init(String newNumber) {
-		if(operator == "") {
+	boolean watch = false;
+	
+	public void setOperator(String newOperator, String newNumber) {
+		if(!watch) {
+			this.operator = newOperator;
 			this.numberOne = newNumber;
+			this.watch = true;
 		} else {
 			this.numberTwo = newNumber;
+			this.watch = false;
 		}
-
-	}
-	public void setOperator(String newOperator) {
-		this.operator = newOperator;
 	}
 	public String getInitOne() {
 		return this.numberOne;
@@ -21,7 +22,10 @@ public class Calculate {
 	public String getInitTwo() {
 		return this.numberTwo;
 	}
-	public int calculate() {
+	public int calculate(String incomingTwo) {
+		//convert the watch operator back
+		this.watch = false;
+		this.numberTwo = incomingTwo;
 		if(numberOne == "") {
 			numberOne = "0";
 		}
@@ -50,6 +54,13 @@ public class Calculate {
 		ToBinary toBinary = new ToBinary();
 		String sendOff = Integer.toString(this.recentTotal);
 		toBinary.decide(sendOff);
+	}
+	public void clearAll() {
+		this.numberOne = "";
+		this.numberTwo = "";
+		this.recentTotal = 0;
+		this.operator = "";
+		this.watch = false;
 	}
 
 }

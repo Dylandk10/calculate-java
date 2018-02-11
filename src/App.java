@@ -48,6 +48,7 @@ public class App extends Application{
 		Button buttonAdd = new Button();
 		Button buttonSubtract = new Button();
 		Button buttonEqual = new Button();
+		Button buttonClear = new Button();
 		ButtonHandler buttonHandler = new ButtonHandler();
 		button1.setText("1");
 		button2.setText("2");
@@ -58,6 +59,7 @@ public class App extends Application{
 		buttonAdd.setText("+");
 		buttonSubtract.setText("-");
 		buttonEqual.setText("=");
+		buttonClear.setText("C");
 		//adding method for all number buttons to add value to them...
 		button1.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -114,9 +116,8 @@ public class App extends Application{
 			@Override
 			public void handle(ActionEvent arg0) {
 				String value = "+";
-				String numberOne = input.getText();
-				calculate.setOperator(value);
-				calculate.init(numberOne);
+				//calculate.init(buttonHandler.returnResult());
+				calculate.setOperator(value, buttonHandler.returnResult());
 				buttonHandler.clearResult();
 				input.setText("");
 			}
@@ -125,9 +126,8 @@ public class App extends Application{
 			@Override
 			public void handle(ActionEvent arg0) {
 				String value = "-";
-				String numberTwo = input.getText();
-				calculate.setOperator(value);
-				calculate.init(numberTwo);
+				//calculate.init(buttonHandler.returnResult());
+				calculate.setOperator(value, buttonHandler.returnResult());
 				buttonHandler.clearResult();
 				input.setText("");
 			}
@@ -135,9 +135,17 @@ public class App extends Application{
 		buttonEqual.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				int answer = calculate.calculate();
+				String numberSend = buttonHandler.returnResult();
+				int answer = calculate.calculate(numberSend);
 				String inputAnswer = Integer.toString(answer);
 				input.setText(inputAnswer);
+			}
+		});
+		buttonClear.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				buttonHandler.clearAll();
+				input.setText("");
 			}
 		});
 		//adding to rootnode
@@ -153,6 +161,7 @@ public class App extends Application{
 		rootNode.add(buttonAdd, 4, 0);
 		rootNode.add(buttonSubtract, 4, 1);
 		rootNode.add(buttonEqual, 4, 2);
+		rootNode.add(buttonClear, 4, 3);
 		primaryStage.setScene(myScene);
 		primaryStage.show();
 	}

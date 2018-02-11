@@ -14,4 +14,12 @@ public class ButtonHandler {
 	public void clearResult() {
 		result = "";
 	}
+	public void clearAll() {
+		Calculate calc = new Calculate();
+		ToBinary tobi = new ToBinary();
+		this.result = "";
+		calc.clearAll();
+		tobi.clearAll();
+		
+	}
 }

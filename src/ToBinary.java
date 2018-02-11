@@ -68,5 +68,9 @@ public class ToBinary {
     }
     public void printInt(int intResult) {
     		System.out.println(intResult);
-    }	
+    }
+    public void clearAll() {
+        this.result = "";
+        this.result1 = 0;
+    }
 }
