@@ -11,4 +11,7 @@ public class ButtonHandler {
 	public String returnResult() {
 		return result;
 	}
+	public void clearResult() {
+		result = "";
+	}
 }

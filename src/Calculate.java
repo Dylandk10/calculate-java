@@ -1,32 +1,50 @@
 
 public class Calculate {
-	int numberOne = 0;
-	int numberTwo = 0;
+	String numberOne = "";
+	String numberTwo = "";
 	int recentTotal = 0;
-	public void init(int numberOne, int numberTwo) {
-		this.numberOne = numberOne;
-		this.numberTwo = numberTwo;
-	}
-	public int add() {
-		recentTotal = this.numberOne + this.numberTwo;
-		return recentTotal;
-	}
-	public int subtract() {
-		recentTotal = this.numberOne - this.numberTwo;
-		return recentTotal;
-	}
-	public int divide() {
-		if(this.numberTwo != 0) {
-			recentTotal = this.numberOne / this.numberTwo;
-			return recentTotal;
+	String operator = "";
+	public void init(String newNumber) {
+		if(operator == "") {
+			this.numberOne = newNumber;
 		} else {
-			return 0;
+			this.numberTwo = newNumber;
 		}
+
 	}
-	public int multiply() {
-		recentTotal = this.numberOne * this.numberTwo;
+	public void setOperator(String newOperator) {
+		this.operator = newOperator;
+	}
+	public String getInitOne() {
+		return this.numberOne;
+	}
+	public String getInitTwo() {
+		return this.numberTwo;
+	}
+	public int calculate() {
+		if(numberOne == "") {
+			numberOne = "0";
+		}
+		if(numberTwo == "") {
+			numberTwo = "0";
+		}
+		System.out.println(operator);
+		int numOne = Integer.parseInt(numberOne);
+		int numTwo = Integer.parseInt(numberTwo);
+		System.out.println(numOne);
+		System.out.println(numTwo);
+		switch (operator) {
+		case "+":
+			recentTotal = numOne + numTwo;
+			break;
+		case "-":
+			recentTotal = numOne - numTwo;
+			break;
+		}
+		System.out.println(recentTotal);
 		return recentTotal;
 	}
+
 	//send the last total to become binary string
 	public void toBinary() {
 		ToBinary toBinary = new ToBinary();

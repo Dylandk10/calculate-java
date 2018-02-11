@@ -45,6 +45,9 @@ public class App extends Application{
 		Button button4 = new Button();
 		Button button5 = new Button();
 		Button button6 = new Button();
+		Button buttonAdd = new Button();
+		Button buttonSubtract = new Button();
+		Button buttonEqual = new Button();
 		ButtonHandler buttonHandler = new ButtonHandler();
 		button1.setText("1");
 		button2.setText("2");
@@ -52,7 +55,10 @@ public class App extends Application{
 		button4.setText("4");
 		button5.setText("5");
 		button6.setText("6");
-		//adding method for all buttons to add value to them...
+		buttonAdd.setText("+");
+		buttonSubtract.setText("-");
+		buttonEqual.setText("=");
+		//adding method for all number buttons to add value to them...
 		button1.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
@@ -102,7 +108,38 @@ public class App extends Application{
 				input.setText(buttonHandler.returnResult());
 			}
 		});
-		
+		//button actions for operators
+		Calculate calculate = new Calculate();
+		buttonAdd.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				String value = "+";
+				String numberOne = input.getText();
+				calculate.setOperator(value);
+				calculate.init(numberOne);
+				buttonHandler.clearResult();
+				input.setText("");
+			}
+		});
+		buttonSubtract.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				String value = "-";
+				String numberTwo = input.getText();
+				calculate.setOperator(value);
+				calculate.init(numberTwo);
+				buttonHandler.clearResult();
+				input.setText("");
+			}
+		});
+		buttonEqual.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				int answer = calculate.calculate();
+				String inputAnswer = Integer.toString(answer);
+				input.setText(inputAnswer);
+			}
+		});
 		//adding to rootnode
 		rootNode.add(btn, 0, 2);
 		rootNode.add(input, 0, 0);
@@ -113,6 +150,9 @@ public class App extends Application{
 		rootNode.add(button4, 1, 1);
 		rootNode.add(button5, 2, 1);
 		rootNode.add(button6, 3, 1);
+		rootNode.add(buttonAdd, 4, 0);
+		rootNode.add(buttonSubtract, 4, 1);
+		rootNode.add(buttonEqual, 4, 2);
 		primaryStage.setScene(myScene);
 		primaryStage.show();
 	}
