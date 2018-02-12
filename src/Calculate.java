@@ -50,10 +50,11 @@ public class Calculate {
 	}
 
 	//send the last total to become binary string
-	public void toBinary() {
+	public String toBinary() {
 		ToBinary toBinary = new ToBinary();
 		String sendOff = Integer.toString(this.recentTotal);
-		toBinary.decide(sendOff);
+		String res = toBinary.decToBinaryString(sendOff);
+		return res;
 	}
 	public void clearAll() {
 		this.numberOne = "";

@@ -28,14 +28,14 @@ public class App extends Application{
 		TextField inputField = new TextField();
 		Label input = new Label();
 		Button btn = new Button();
-		btn.setText("Launch calc-app");
+		btn.setText("Type hexidecmial for result");
 		//launches app with button input
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
 				ToBinary toBinary = new ToBinary();
-				toBinary.decide(inputField.getText());
-				
+				String hexResult = toBinary.convertStringHex(inputField.getText());
+				input.setText(hexResult);
 			}
 		});
 		//number buttons
@@ -49,7 +49,13 @@ public class App extends Application{
 		Button buttonSubtract = new Button();
 		Button buttonEqual = new Button();
 		Button buttonClear = new Button();
+		Button buttonBinary = new Button();
 		ButtonHandler buttonHandler = new ButtonHandler();
+		
+		//calculate constructor
+		Calculate calculate = new Calculate();
+		
+		//button text
 		button1.setText("1");
 		button2.setText("2");
 		button3.setText("3");
@@ -60,6 +66,7 @@ public class App extends Application{
 		buttonSubtract.setText("-");
 		buttonEqual.setText("=");
 		buttonClear.setText("C");
+		buttonBinary.setText("To Binary");
 		//adding method for all number buttons to add value to them...
 		button1.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -111,7 +118,7 @@ public class App extends Application{
 			}
 		});
 		//button actions for operators
-		Calculate calculate = new Calculate();
+
 		buttonAdd.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
@@ -148,10 +155,19 @@ public class App extends Application{
 				input.setText("");
 			}
 		});
+		buttonBinary.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				String result = calculate.toBinary();
+				input.setText(result);
+			}
+		});
+		
 		//adding to rootnode
 		rootNode.add(btn, 0, 2);
 		rootNode.add(input, 0, 0);
 		rootNode.add(inputField, 0, 1);
+		rootNode.add(buttonBinary, 0, 3);
 		rootNode.add(button1, 1, 0);
 		rootNode.add(button2, 2, 0);
 		rootNode.add(button3, 3, 0);
