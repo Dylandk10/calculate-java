@@ -44,6 +44,16 @@ public class Calculate {
 		case "-":
 			recentTotal = numOne - numTwo;
 			break;
+		case "*":
+			recentTotal = numOne * numTwo;
+			break;
+		case "/":
+			if (numTwo == 0) {
+				recentTotal = 0;
+			} else {
+			recentTotal = numOne / numTwo;
+			break;
+			}
 		}
 		System.out.println(recentTotal);
 		return recentTotal;
