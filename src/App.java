@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import javafx.geometry.Insets;
 import javafx.geometry.*;
 
-public class App extends Application{
+public class App extends Application {
 	Button button1 = new Button("1");
 	Button button2 = new Button("2");
 	Button button3 = new Button("3");
@@ -74,62 +74,61 @@ public class App extends Application{
 		primaryStage.setScene(myScene);
 		primaryStage.show();
 	}
-	
-	public void buttonPressed(ActionEvent e)
-	{
+	//button handling for number events...
+	public void buttonPressed(ActionEvent e) {
 		String value = "";
 		
-		if(e.getSource() == button1){
+		if(e.getSource() == button1) {
 			value = "1";
 			buttonHandler.addResult(value);
 			input.setText(buttonHandler.returnResult());
 		}
-		else if(e.getSource() == button2){
+		else if(e.getSource() == button2) {
 			value = "2";
 			buttonHandler.addResult(value);
 			input.setText(buttonHandler.returnResult());
 		}
-		else if(e.getSource() == button3){
+		else if(e.getSource() == button3) {
 			value = "3";
 			buttonHandler.addResult(value);
 			input.setText(buttonHandler.returnResult());
 		}
-		else if(e.getSource() == button4){
+		else if(e.getSource() == button4) {
 			value = "4";
 			buttonHandler.addResult(value);
 			input.setText(buttonHandler.returnResult());
 		}
-		else if(e.getSource() == button5){
+		else if(e.getSource() == button5) {
 			value = "5";
 			buttonHandler.addResult(value);
 			input.setText(buttonHandler.returnResult());
 		}
-		else if(e.getSource() == button6){
+		else if(e.getSource() == button6) {
 			value = "6";
 			buttonHandler.addResult(value);
 			input.setText(buttonHandler.returnResult());
 		}
-		else if(e.getSource() == buttonAdd){
+		else if(e.getSource() == buttonAdd) {
 			value = "+";
 			//calculate.init(buttonHandler.returnResult());
 			calculate.setOperator(value, buttonHandler.returnResult());
 			buttonHandler.clearResult();
 			input.setText("");
 		}
-		else if(e.getSource() == buttonSubtract){
+		else if(e.getSource() == buttonSubtract) {
 			value = "-";
 			//calculate.init(buttonHandler.returnResult());
 			calculate.setOperator(value, buttonHandler.returnResult());
 			buttonHandler.clearResult();
 			input.setText("");
 		}
-		else if(e.getSource() == buttonEqual){
+		else if(e.getSource() == buttonEqual) {
 			String numberSend = buttonHandler.returnResult();
 			int answer = calculate.calculate(numberSend);
 			String inputAnswer = Integer.toString(answer);
 			input.setText(inputAnswer);
 		}
-		else if(e.getSource() == buttonClear){
+		else if(e.getSource() == buttonClear) {
 			buttonHandler.clearAll();
 			input.setText("");
 		}
