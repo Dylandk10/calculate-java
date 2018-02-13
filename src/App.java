@@ -21,9 +21,10 @@ public class App extends Application {
 	Button buttonEqual = new Button("=");
 	Button buttonClear = new Button("C");
 	Button buttonBinary = new Button("To Bianry");
+	Button buttonHexidecimal = new Button("To Hexidecimal");
 	
-	TextField inputField = new TextField();
-	Label input = new Label();
+	//main label for app
+	Label input = new Label("00000");
 
 	ButtonHandler buttonHandler = new ButtonHandler();
 	Calculate calculate = new Calculate();
@@ -41,8 +42,9 @@ public class App extends Application {
 		rootNode.setAlignment(Pos.CENTER);
 		
 		Scene myScene = new Scene(rootNode, 500, 500);
-
+		//binary or hex options
 		buttonBinary.setOnAction(e -> buttonPressed(e));
+		buttonHexidecimal.setOnAction(e -> buttonPressed(e));
 		
 		//adding method for all number buttons to add value to them...
 		button1.setOnAction(e -> buttonPressed(e)); // Sends the action event to the buttonPressed method
@@ -58,9 +60,9 @@ public class App extends Application {
 		buttonEqual.setOnAction(e -> buttonPressed(e));
 		buttonClear.setOnAction(e -> buttonPressed(e));
 		//adding to rootnode
-		rootNode.add(buttonBinary, 0, 2);
 		rootNode.add(input, 0, 0);
-		rootNode.add(inputField, 0, 1);
+		rootNode.add(buttonBinary, 0, 1);
+		rootNode.add(buttonHexidecimal, 0, 2);
 		rootNode.add(button1, 1, 0);
 		rootNode.add(button2, 2, 0);
 		rootNode.add(button3, 3, 0);
@@ -130,13 +132,17 @@ public class App extends Application {
 		}
 		else if(e.getSource() == buttonClear) {
 			buttonHandler.clearAll();
-			input.setText("");
+			input.setText("00000");
 		}
 		else if(e.getSource() == buttonBinary) {
 			String result = calculate.toBinary();
 			input.setText(result);
 			//ToBinary toBinary = new ToBinary();
 			//toBinary.decide(inputField.getText());
+		}
+		else if(e.getSource() == buttonHexidecimal) {
+			String hexResult = calculate.toHexidecimal();
+			input.setText(hexResult);
 		}
 	}
 

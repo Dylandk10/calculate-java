@@ -56,6 +56,12 @@ public class Calculate {
 		String res = toBinary.decToBinaryString(sendOff);
 		return res;
 	}
+	public String toHexidecimal() {
+		ToHexidecimal hexDec = new ToHexidecimal();
+		String sendIt = Integer.toString(this.recentTotal);
+		String res = hexDec.decimalToHexidecimal(sendIt);
+		return res;
+	}
 	public void clearAll() {
 		this.numberOne = "";
 		this.numberTwo = "";
