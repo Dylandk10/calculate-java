@@ -25,15 +25,23 @@ public class App extends Application {
 	Button buttonDivide = new Button("/");
 	Button buttonEqual = new Button("=");
 	Button buttonClear = new Button("C");
-	//button convery
+	//button convert
 	Button buttonBinary = new Button("To Bianry");
 	Button buttonHexidecimal = new Button("To Hexidecimal");
+	Button buttonPop = new Button("Enter hexidecimal manually");
+	//popup window buttons
+	Button btnBinary = new Button("To Binary");
 	
 	//main label for app
 	Label input = new Label("00000");
-
+	//popup label
+	Label label = new Label("Enter hexidecimal");
+	//Textfield popup
+	TextField text = new TextField();
+	//class handlers...
 	ButtonHandler buttonHandler = new ButtonHandler();
 	Calculate calculate = new Calculate();
+	ToBinary toBinary = new ToBinary();
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -51,6 +59,7 @@ public class App extends Application {
 		//convert options
 		buttonBinary.setOnAction(e -> convertPressed(e));
 		buttonHexidecimal.setOnAction(e -> convertPressed(e));
+		buttonPop.setOnAction(e -> convertPressed(e));
 		
 		//adding method for all number buttons to add value to them...
 		button0.setOnAction(e -> buttonPressed(e));
@@ -75,7 +84,9 @@ public class App extends Application {
 		rootNode.add(input, 0, 0);
 		rootNode.add(buttonBinary, 0, 1);
 		rootNode.add(buttonHexidecimal, 0, 2);
+		rootNode.add(buttonPop, 0, 3);
 		//adding to rootnode numbers
+		rootNode.add(button0, 4, 4);
 		rootNode.add(button1, 1, 0);
 		rootNode.add(button2, 2, 0);
 		rootNode.add(button3, 3, 0);
@@ -98,52 +109,52 @@ public class App extends Application {
 	//button handling for number events...
 	public void buttonPressed(ActionEvent e) {
 		String value = "";
-		if(e.getSource() == button1) {
+		if (e.getSource() == button0) {
 			value="0";
 			buttonHandler.addResult(value);
 			input.setText(buttonHandler.returnResult());
 		}
-		else if(e.getSource() == button1) {
+		else if (e.getSource() == button1) {
 			value = "1";
 			buttonHandler.addResult(value);
 			input.setText(buttonHandler.returnResult());
 		}
-		else if(e.getSource() == button2) {
+		else if (e.getSource() == button2) {
 			value = "2";
 			buttonHandler.addResult(value);
 			input.setText(buttonHandler.returnResult());
 		}
-		else if(e.getSource() == button3) {
+		else if (e.getSource() == button3) {
 			value = "3";
 			buttonHandler.addResult(value);
 			input.setText(buttonHandler.returnResult());
 		}
-		else if(e.getSource() == button4) {
+		else if (e.getSource() == button4) {
 			value = "4";
 			buttonHandler.addResult(value);
 			input.setText(buttonHandler.returnResult());
 		}
-		else if(e.getSource() == button5) {
+		else if (e.getSource() == button5) {
 			value = "5";
 			buttonHandler.addResult(value);
 			input.setText(buttonHandler.returnResult());
 		}
-		else if(e.getSource() == button6) {
+		else if (e.getSource() == button6) {
 			value = "6";
 			buttonHandler.addResult(value);
 			input.setText(buttonHandler.returnResult());
 		}
-		else if(e.getSource() == button7) {
+		else if (e.getSource() == button7) {
 			value = "7";
 			buttonHandler.addResult(value);
 			input.setText(buttonHandler.returnResult());
 		}
-		else if(e.getSource() == button8) {
+		else if (e.getSource() == button8) {
 			value = "8";
 			buttonHandler.addResult(value);
 			input.setText(buttonHandler.returnResult());
 		}
-		else if(e.getSource() == button9) {
+		else if (e.getSource() == button9) {
 			value="9";
 			buttonHandler.addResult(value);
 			input.setText(buttonHandler.returnResult());
@@ -153,57 +164,81 @@ public class App extends Application {
 	
 	public void operatorPressed(ActionEvent e) {
 		String value = "";
-		if(e.getSource() == buttonAdd) {
+		if (e.getSource() == buttonAdd) {
 			value = "+";
 			//calculate.init(buttonHandler.returnResult());
 			calculate.setOperator(value, buttonHandler.returnResult());
 			buttonHandler.clearResult();
 			input.setText("");
 		}
-		else if(e.getSource() == buttonSubtract) {
+		else if (e.getSource() == buttonSubtract) {
 			value = "-";
 			//calculate.init(buttonHandler.returnResult());
 			calculate.setOperator(value, buttonHandler.returnResult());
 			buttonHandler.clearResult();
 			input.setText("");
 		}
-		else if(e.getSource() == buttonMultiply) {
+		else if (e.getSource() == buttonMultiply) {
 			value = "*";
 			//calculate.init(buttonHandler.returnResult());
 			calculate.setOperator(value, buttonHandler.returnResult());
 			buttonHandler.clearResult();
 			input.setText("");
 		}
-		else if(e.getSource() == buttonDivide) {
+		else if (e.getSource() == buttonDivide) {
 			value = "/";
 			//calculate.init(buttonHandler.returnResult());
 			calculate.setOperator(value, buttonHandler.returnResult());
 			buttonHandler.clearResult();
 			input.setText("");
 		}
-		else if(e.getSource() == buttonEqual) {
+		else if (e.getSource() == buttonEqual) {
 			String numberSend = buttonHandler.returnResult();
 			int answer = calculate.calculate(numberSend);
 			String inputAnswer = Integer.toString(answer);
 			input.setText(inputAnswer);
 		}
-		else if(e.getSource() == buttonClear) {
+		else if (e.getSource() == buttonClear) {
 			buttonHandler.clearAll();
 			input.setText("00000");
 		}
 	}
 	
 	public void convertPressed(ActionEvent e) {
-		if(e.getSource() == buttonBinary) {
+		if (e.getSource() == buttonBinary) {
 			String result = calculate.toBinary();
 			input.setText(result);
 			//ToBinary toBinary = new ToBinary();
 			//toBinary.decide(inputField.getText());
 		}
-		else if(e.getSource() == buttonHexidecimal) {
+		else if (e.getSource() == buttonHexidecimal) {
 			String hexResult = calculate.toHexidecimal();
 			input.setText(hexResult);
+		} else if (e.getSource() == buttonPop) {
+			//Stage theStage = (Stage) e.getSource();
+			createPopUp();
+			
 		}
 	}
-
+	//popup to override primary stage...
+	public void createPopUp() {
+		Stage theStage = new Stage();
+		HBox layout = new HBox(60);
+		btnBinary.setOnAction(e -> popupBinaryPressed(e));
+		layout.setSpacing(30);;
+		layout.getChildren().addAll(label, text, btnBinary);
+		theStage.setScene(new Scene(layout));
+		theStage.show();
+		   
+	}
+	public void popupBinaryPressed(ActionEvent e) {
+		if(e.getSource() == btnBinary) {
+			String toSend = text.getText();
+			if(toBinary.decide(toSend)) {
+				label.setText(toBinary.convertStringHex(toSend));
+			} else {
+				label.setText("Enter Valid Hexidecimal");
+			}
+		}
+	}
 }

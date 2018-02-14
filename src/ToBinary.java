@@ -5,18 +5,21 @@ public class ToBinary {
     String result = "";
     int result1 = 0;
     //main method to decide if the incoming is hex or decimal
-    public void decide(String incomingNumber) {
+    public boolean decide(String incomingNumber) {
     	//regex to ensure that only A-F can be used exept for x.
     	final String reg = "[g-zG-Z&&[^xX]]+";
     	Pattern pattern = Pattern.compile(reg);
     	Matcher matcher = pattern.matcher(incomingNumber);
     		if(incomingNumber.length() == 0 || matcher.find()) {
     			System.out.println("Must enter a valid hexidecimal or decical number...");
+    			return false;
     		}
     		else if(incomingNumber.indexOf("0x") == -1) {
-    			this.decToBinaryString(incomingNumber);
+    			//this.decToBinaryString(incomingNumber);
+    			return true;
     		} else {
-    			this.convertStringHex(incomingNumber);
+    			//this.convertStringHex(incomingNumber);
+    			return true;
     		}
     }
     //convert hex string to binary string
