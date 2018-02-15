@@ -28,20 +28,25 @@ public class App extends Application {
 	//button convert
 	Button buttonBinary = new Button("To Bianry");
 	Button buttonHexadecimal = new Button("To Hexadecimal");
-	Button buttonPop = new Button("Enter hexadecimal manually");
+	Button buttonPopHex = new Button("Enter hexadecimal manually");
+	Button buttonPopBi = new Button("Enter Binary manually");
 	//popup window buttons
 	Button btnBinary = new Button("To Binary");
+	Button btnHexadecimal = new Button("To Hexadecimal");
 	
 	//main label for app
 	Label input = new Label("00000");
 	//popup label
-	Label label = new Label("Enter hexadecimal");
+	Label labelHex = new Label("Enter hexadecimal");
+	Label labelBi = new Label("Enter Bianry");
 	//Textfield popup
-	TextField text = new TextField();
+	TextField textHex = new TextField();
+	TextField textBi = new TextField();
 	//class handlers...
 	ButtonHandler buttonHandler = new ButtonHandler();
 	Calculate calculate = new Calculate();
 	ToBinary toBinary = new ToBinary();
+	ToHexadecimal toHexadecimal = new ToHexadecimal();
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -59,7 +64,8 @@ public class App extends Application {
 		//convert options
 		buttonBinary.setOnAction(e -> convertPressed(e));
 		buttonHexadecimal.setOnAction(e -> convertPressed(e));
-		buttonPop.setOnAction(e -> convertPressed(e));
+		buttonPopHex.setOnAction(e -> convertPressed(e));
+		buttonPopBi.setOnAction(e -> convertPressed(e));
 		
 		//adding method for all number buttons to add value to them...
 		button0.setOnAction(e -> buttonPressed(e));
@@ -84,7 +90,8 @@ public class App extends Application {
 		rootNode.add(input, 0, 0);
 		rootNode.add(buttonBinary, 0, 1);
 		rootNode.add(buttonHexadecimal, 0, 2);
-		rootNode.add(buttonPop, 0, 3);
+		rootNode.add(buttonPopHex, 0, 3);
+		rootNode.add(buttonPopBi, 0, 4);
 		//adding to rootnode numbers
 		rootNode.add(button0, 4, 4);
 		rootNode.add(button1, 1, 0);
@@ -214,20 +221,35 @@ public class App extends Application {
 		else if (e.getSource() == buttonHexadecimal) {
 			String hexResult = calculate.toHexidecimal();
 			input.setText(hexResult);
-		} else if (e.getSource() == buttonPop) {
+		} 
+		else if (e.getSource() == buttonPopHex) {
 			//Stage theStage = (Stage) e.getSource();
-			createPopUp();
-			
+			createPopUpHex();
+		}
+		else if (e.getSource() == buttonPopBi) {
+			createPopBinary();
 		}
 	}
-	//popup to override primary stage...
-	public void createPopUp() {
+	//popup to override primary stage...hexadecimal
+	public void createPopUpHex() {
 		Stage theStage = new Stage();
 		HBox layout = new HBox(60);
 		//button action to call popup methods...
 		btnBinary.setOnAction(e -> popupBinaryPressed(e));
 		layout.setSpacing(30);;
-		layout.getChildren().addAll(label, text, btnBinary);
+		layout.getChildren().addAll(labelHex, textHex, btnBinary);
+		theStage.setScene(new Scene(layout));
+		theStage.show();
+		   
+	}
+	//popup to override primary stage...Binary
+	public void createPopBinary() {
+		Stage theStage = new Stage();
+		HBox layout = new HBox(60);
+		//button action to call popup methods...
+		btnHexadecimal.setOnAction(e -> popupHexPressed(e));
+		layout.setSpacing(30);;
+		layout.getChildren().addAll(labelBi, textBi, btnHexadecimal);
 		theStage.setScene(new Scene(layout));
 		theStage.show();
 		   
@@ -235,12 +257,16 @@ public class App extends Application {
 	//action handlers for hexadecimal popup window
 	public void popupBinaryPressed(ActionEvent e) {
 		if(e.getSource() == btnBinary) {
-			String toSend = text.getText();
+			String toSend = textHex.getText();
 			if(toBinary.decide(toSend)) {
-				label.setText(toBinary.convertStringHex(toSend));
+				labelHex.setText(toBinary.convertStringHex(toSend));
 			} else {
-				label.setText("Enter Valid Hexadecimal");
+				labelHex.setText("Enter Valid Hexadecimal");
 			}
 		}
+	}
+	public void popupHexPressed(ActionEvent e) {
+		String toSend = textBi.getText();
+		labelBi.setText(toHexadecimal.binaryToHexadecimal(toSend));
 	}
 }
