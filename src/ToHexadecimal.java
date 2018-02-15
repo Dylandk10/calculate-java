@@ -1,6 +1,6 @@
 
-public class ToHexidecimal {
-	public String decimalToHexidecimal(String number) {
+public class ToHexadecimal {
+	public String decimalToHexadecimal(String number) {
 		int hold = Integer.parseInt(number);
 		String result = Integer.toHexString(hold);
 		this.printStringHex(result);

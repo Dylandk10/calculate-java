@@ -67,9 +67,9 @@ public class Calculate {
 		return res;
 	}
 	public String toHexidecimal() {
-		ToHexidecimal hexDec = new ToHexidecimal();
+		ToHexadecimal hexDec = new ToHexadecimal();
 		String sendIt = Integer.toString(this.recentTotal);
-		String res = hexDec.decimalToHexidecimal(sendIt);
+		String res = hexDec.decimalToHexadecimal(sendIt);
 		return res;
 	}
 	public void clearAll() {

@@ -27,15 +27,15 @@ public class App extends Application {
 	Button buttonClear = new Button("C");
 	//button convert
 	Button buttonBinary = new Button("To Bianry");
-	Button buttonHexidecimal = new Button("To Hexidecimal");
-	Button buttonPop = new Button("Enter hexidecimal manually");
+	Button buttonHexadecimal = new Button("To Hexadecimal");
+	Button buttonPop = new Button("Enter hexadecimal manually");
 	//popup window buttons
 	Button btnBinary = new Button("To Binary");
 	
 	//main label for app
 	Label input = new Label("00000");
 	//popup label
-	Label label = new Label("Enter hexidecimal");
+	Label label = new Label("Enter hexadecimal");
 	//Textfield popup
 	TextField text = new TextField();
 	//class handlers...
@@ -58,7 +58,7 @@ public class App extends Application {
 		Scene myScene = new Scene(rootNode, 500, 500);
 		//convert options
 		buttonBinary.setOnAction(e -> convertPressed(e));
-		buttonHexidecimal.setOnAction(e -> convertPressed(e));
+		buttonHexadecimal.setOnAction(e -> convertPressed(e));
 		buttonPop.setOnAction(e -> convertPressed(e));
 		
 		//adding method for all number buttons to add value to them...
@@ -83,7 +83,7 @@ public class App extends Application {
 		//adding to rootnode convert input...
 		rootNode.add(input, 0, 0);
 		rootNode.add(buttonBinary, 0, 1);
-		rootNode.add(buttonHexidecimal, 0, 2);
+		rootNode.add(buttonHexadecimal, 0, 2);
 		rootNode.add(buttonPop, 0, 3);
 		//adding to rootnode numbers
 		rootNode.add(button0, 4, 4);
@@ -211,7 +211,7 @@ public class App extends Application {
 			//ToBinary toBinary = new ToBinary();
 			//toBinary.decide(inputField.getText());
 		}
-		else if (e.getSource() == buttonHexidecimal) {
+		else if (e.getSource() == buttonHexadecimal) {
 			String hexResult = calculate.toHexidecimal();
 			input.setText(hexResult);
 		} else if (e.getSource() == buttonPop) {
@@ -224,6 +224,7 @@ public class App extends Application {
 	public void createPopUp() {
 		Stage theStage = new Stage();
 		HBox layout = new HBox(60);
+		//button action to call popup methods...
 		btnBinary.setOnAction(e -> popupBinaryPressed(e));
 		layout.setSpacing(30);;
 		layout.getChildren().addAll(label, text, btnBinary);
@@ -231,13 +232,14 @@ public class App extends Application {
 		theStage.show();
 		   
 	}
+	//action handlers for hexadecimal popup window
 	public void popupBinaryPressed(ActionEvent e) {
 		if(e.getSource() == btnBinary) {
 			String toSend = text.getText();
 			if(toBinary.decide(toSend)) {
 				label.setText(toBinary.convertStringHex(toSend));
 			} else {
-				label.setText("Enter Valid Hexidecimal");
+				label.setText("Enter Valid Hexadecimal");
 			}
 		}
 	}
