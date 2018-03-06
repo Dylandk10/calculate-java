@@ -15,10 +15,9 @@ public class ToHexadecimal {
 				System.out.println(i);
 				hexReturn = "Enter Valid Bianry";
 			} else {
-				int hold = Integer.parseInt(number);
-				String decHold = Integer.toString(hold, 2);
-				int intHold = Integer.parseInt(decHold);
-				hexReturn  = Integer.toHexString(intHold);
+				int hold = Integer.parseInt(number, 2);
+				//String decHold = Integer.toString(hold, 2);
+				hexReturn  = Integer.toString(hold, 16);
 			}
 		}
 		return hexReturn;
