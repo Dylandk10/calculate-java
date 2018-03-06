@@ -6,7 +6,6 @@ public class ToHexadecimal {
 		this.printStringHex(result);
 		return "0x" + result;
 	}
-	/*NOT COMPLETE AT ALL NEED TO WORK NEED TO WORK ON*/
 	public String binaryToHexadecimal(String number) {
 		String[] stringArr = number.split(" ");
 		String hexReturn = "";
@@ -16,7 +15,6 @@ public class ToHexadecimal {
 				hexReturn = "Enter Valid Bianry";
 			} else {
 				int hold = Integer.parseInt(number, 2);
-				//String decHold = Integer.toString(hold, 2);
 				hexReturn  = Integer.toString(hold, 16);
 			}
 		}

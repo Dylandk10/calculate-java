@@ -1,3 +1,7 @@
+import sockets.OpeningServer;
+import java.net.*;
+import java.io.*;
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
@@ -53,6 +57,19 @@ public class App extends Application {
 	}
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		//socket connection...
+		final int port = 8080;
+		final String serverName = "localhost";
+		try {
+			Thread thread = new OpeningServer(port);
+			Socket client = new Socket(serverName, port);
+			thread.start();
+			System.out.println("Client connect to " + client.getRemoteSocketAddress());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		//app set up
 		primaryStage.setTitle("Application");
 		GridPane rootNode = new GridPane();
 		rootNode.setPadding(new Insets(10, 0, 0, 0) );
