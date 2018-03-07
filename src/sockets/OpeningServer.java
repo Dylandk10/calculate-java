@@ -4,6 +4,7 @@ import java.io.*;
 
 public class OpeningServer extends Thread {
 	private ServerSocket serverSocket;
+	Socket server;
 	
 	public OpeningServer(int port) throws IOException{
 		serverSocket = new ServerSocket(port);
@@ -13,7 +14,7 @@ public class OpeningServer extends Thread {
 	public void run() {
 		try {
 			System.out.println("Waiting for client " + serverSocket.getLocalPort() + "...");
-			Socket server = serverSocket.accept();
+			server = serverSocket.accept();
 			System.out.println("Server Connected to " + server.getRemoteSocketAddress());
 			server.close();
 		} catch (SocketTimeoutException s) {
@@ -22,6 +23,18 @@ public class OpeningServer extends Thread {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public boolean recNum(int num) {
+		try {
+			if(server.isConnected()) {
+				server.sendUrgentData(num);
+				return true;
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 }
