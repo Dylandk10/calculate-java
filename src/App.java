@@ -1,7 +1,4 @@
-import sockets.OpeningServer;
-import java.net.*;
-import java.io.*;
-import java.io.IOException;
+import sockets.ClientSocket;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
@@ -57,17 +54,9 @@ public class App extends Application {
 	}
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		//socket connection...
-		final int port = 8080;
-		final String serverName = "localhost";
-		try {
-			Thread thread = new OpeningServer(port);
-			Socket client = new Socket(serverName, port);
-			thread.start();
-			System.out.println("Client connect to " + client.getRemoteSocketAddress());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		//set up sockets
+		ClientSocket clientSocket = new ClientSocket();
+		clientSocket.run();
 		
 		//app set up
 		primaryStage.setTitle("Application");

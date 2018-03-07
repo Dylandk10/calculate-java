@@ -14,7 +14,7 @@ public class OpeningServer extends Thread {
 		try {
 			System.out.println("Waiting for client " + serverSocket.getLocalPort() + "...");
 			Socket server = serverSocket.accept();
-			System.out.println("Connected to " + server.getRemoteSocketAddress());
+			System.out.println("Server Connected to " + server.getRemoteSocketAddress());
 			server.close();
 		} catch (SocketTimeoutException s) {
 			System.out.println("Server timed out");
