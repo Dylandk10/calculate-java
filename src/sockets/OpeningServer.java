@@ -5,8 +5,9 @@ import java.io.*;
 public class OpeningServer extends Thread {
 	private ServerSocket serverSocket;
 	Socket server;
+	InputStream owr;
 	
-	public OpeningServer(int port) throws IOException{
+	public OpeningServer(int port) throws IOException {
 		serverSocket = new ServerSocket(port);
 		serverSocket.setSoTimeout(10000);
 	}
@@ -16,7 +17,7 @@ public class OpeningServer extends Thread {
 			System.out.println("Waiting for client " + serverSocket.getLocalPort() + "...");
 			server = serverSocket.accept();
 			System.out.println("Server Connected to " + server.getRemoteSocketAddress());
-			server.close();
+			server.getKeepAlive();
 		} catch (SocketTimeoutException s) {
 			System.out.println("Server timed out");
 		} catch (IOException e) {
@@ -24,17 +25,30 @@ public class OpeningServer extends Thread {
 			e.printStackTrace();
 		}
 	}
-	public boolean recNum(int num) {
+	public void read() {
+		//read outputstream
 		try {
-			if(server.isConnected()) {
-				server.sendUrgentData(num);
-				return true;
-			}
+			owr = server.getInputStream();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			try {
+				int character;
+				while((character = owr.read()) != -1) {
+					System.out.println("Message: " + character);
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			try {
+				server.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		return false;
 	}
 	
 }

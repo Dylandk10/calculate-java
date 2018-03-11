@@ -48,6 +48,8 @@ public class App extends Application {
 	Calculate calculate = new Calculate();
 	ToBinary toBinary = new ToBinary();
 	ToHexadecimal toHexadecimal = new ToHexadecimal();
+	//socket
+	ClientSocket clientSocket;
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -55,7 +57,7 @@ public class App extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		//set up sockets
-		ClientSocket clientSocket = new ClientSocket();
+		clientSocket = new ClientSocket();
 		clientSocket.run();
 		
 		//app set up
@@ -209,6 +211,8 @@ public class App extends Application {
 			String numberSend = buttonHandler.returnResult();
 			int answer = calculate.calculate(numberSend);
 			String inputAnswer = Integer.toString(answer);
+			//send to socket
+			clientSocket.sendData(Integer.parseInt(inputAnswer));
 			input.setText(inputAnswer);
 		}
 		else if (e.getSource() == buttonClear) {
