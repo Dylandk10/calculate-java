@@ -5,7 +5,7 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 
 public class ClientSocket {
-	Thread thread;
+	OpeningServer thread;
 	Socket client;
 	public void run() throws InterruptedException {
 		//socket connection...
@@ -14,7 +14,7 @@ public class ClientSocket {
 		try {
 			thread = new OpeningServer(port);
 			client = new Socket(serverName, port);
-			thread.start();
+			thread.run();
 			System.out.println("Client connect to " + client.getRemoteSocketAddress());
 			client.getKeepAlive();
 		} catch (IOException e) {
