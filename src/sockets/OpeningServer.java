@@ -14,7 +14,8 @@ import java.io.*;
 public class OpeningServer extends JFrame {
 	private ServerSocket serverSocket;
 	Socket server;
-	InputStream owr;
+	//InputStream owr;
+	DataInputStream owr;
 	private Socket conn;
 	private JTextArea TA;
 	private JPanel panel1;
@@ -48,7 +49,7 @@ public class OpeningServer extends JFrame {
 	    } catch (IOException ioe) {
 	        System.out.println(ioe);
 	    }
-
+	    
 	}
 	public void log(JTextArea txt, String message) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -61,27 +62,18 @@ public class OpeningServer extends JFrame {
 	public void read() {
 		//read outputstream
 		try {
-			owr = server.getInputStream();
+			owr = new DataInputStream((server.getInputStream()));
+			//owr = server.getInputStream();
+			int character;
+			while((character = owr.readInt()) != -1) {
+				log(TA, Integer.toString(character));
+				System.out.println(character);
+			}
+			server.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
-			try {
-				int character;
-				while((character = owr.read()) != -1) {
-					log(TA, Integer.toString(character));
-				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-			try {
-				server.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		} 
 	}
 	
 }

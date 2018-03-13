@@ -1,5 +1,6 @@
 package sockets;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
@@ -25,8 +26,11 @@ public class ClientSocket {
 	public boolean sendData(int num) {
 		boolean result;
 		try {
-			OutputStreamWriter osw = new OutputStreamWriter(client.getOutputStream());
-			osw.write(num);
+			//OutputStreamWriter osw = new OutputStreamWriter(client.getOutputStream());
+			DataOutputStream osw = new DataOutputStream(client.getOutputStream());
+			osw.writeInt(num);
+			osw.flush();
+			osw.close();
 			result = true;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
