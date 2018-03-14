@@ -20,6 +20,7 @@ public class OpeningServer extends JFrame {
 	private JTextArea TA;
 	private JPanel panel1;
 	private final int mainPort;
+
 	public OpeningServer(int port) throws IOException {
 		serverSocket = new ServerSocket(port);
 		serverSocket.setSoTimeout(10000);
@@ -33,23 +34,25 @@ public class OpeningServer extends JFrame {
 	    TA.setForeground(Color.GREEN);
 	    c.add(new JScrollPane(TA));
 	    setVisible(true);
-	    log(TA, "Server started. \n");
+	    log(TA, "Server started...on port: " + port + " \n");
 	    mainPort = port;
+	    
 	}
 	//connecting serve to client
 	public void run() throws IOException {
 	    try {
-	        log(TA, "ServerSocket created. \n Listering for connections... \n");
+	        log(TA, "ServerSocket created. \nListering for connections... \n");
 	       //serverSocket = new ServerSocket(mainPort);
 
 	        for (int i = 1; i < 2; i++) {
 	            conn = serverSocket.accept();
-	            log(TA, "User " + i + " connected");
+	            log(TA, "User " + i + " connected on port: " + conn.getLocalPort());
+	            conn.setKeepAlive(true);
 	        }
+	        this.read();
 	    } catch (IOException ioe) {
 	        System.out.println(ioe);
 	    }
-	    
 	}
 	public void log(JTextArea txt, String message) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -62,10 +65,10 @@ public class OpeningServer extends JFrame {
 	public void read() {
 		//read outputstream
 		try {
-			owr = new DataInputStream((server.getInputStream()));
+			owr = new DataInputStream((conn.getInputStream()));
 			//owr = server.getInputStream();
 			int character;
-			while((character = owr.readInt()) != -1) {
+			while((character = owr.read()) != -1) {
 				log(TA, Integer.toString(character));
 				System.out.println(character);
 			}

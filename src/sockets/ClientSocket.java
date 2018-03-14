@@ -17,7 +17,6 @@ public class ClientSocket {
 			client = new Socket(serverName, port);
 			thread.run();
 			System.out.println("Client connect to " + client.getRemoteSocketAddress());
-			client.getKeepAlive();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
