@@ -27,9 +27,9 @@ public class OpeningServer extends JFrame {
 	private JTextArea TA;
 	private JPanel panel1;
 	private final int mainPort;
-	Users users = new Users("Main", "Main");
 	UserArray<String> usersArray = new UserArray<String>();
-
+	//main user to call methods from single user array
+	Users users = new Users("Main", "Main");
 	public OpeningServer(int port) throws IOException {
 		//create server box
 		serverSocket = new ServerSocket(port);
@@ -47,7 +47,7 @@ public class OpeningServer extends JFrame {
 	    setVisible(true);
 	    log(TA, "Server started...on port: " + port + " \n");
 	    mainPort = port;
-	    
+		usersArray.push("Main");
 	    TA.addKeyListener((KeyListener) new KeyListener() {
 
 			@Override
@@ -92,6 +92,11 @@ public class OpeningServer extends JFrame {
 	            hold = i;
 	        }
 	        Users user = new Users("User" + Integer.toString(hold), Integer.toString(conn.getLocalPort()));
+	        usersArray.push("User" + Integer.toString(hold));
+	        //slice user from array if socket is closed memory management
+	        if(serverSocket.isClosed()) {
+	        		usersArray.pop();
+	        }
 	    } catch (IOException ioe) {
 	        System.out.println(ioe);
 	    }
@@ -109,7 +114,7 @@ public class OpeningServer extends JFrame {
 		int end = TA.getLineEndOffset(lines);
 		String endLine = TA.getText().substring(start, end);
 		if(endLine.equals("logusers")) {
-			System.out.println("Logging users");
+			log(TA, "Logging user...\n");
 			for(int i = 0; i < usersArray.size(); i++) {
 				log(TA, "Users" + i + ": "  + usersArray.getHead(i) + "\n");
 			}

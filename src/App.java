@@ -1,10 +1,14 @@
 import sockets.ClientSocket;
+
+import java.beans.EventHandler;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.*;
 
@@ -120,6 +124,11 @@ public class App extends Application {
 		rootNode.add(buttonClear, 4, 3);
 		primaryStage.setScene(myScene);
 		primaryStage.show();
+		//close ports on close event
+	    primaryStage.setOnCloseRequest((WindowEvent ev) -> {
+	    	   	clientSocket.close();
+	    	   	primaryStage.close();
+	    });
 	}
 	//button handling for number events...
 	public void buttonPressed(ActionEvent e) {

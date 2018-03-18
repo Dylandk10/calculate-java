@@ -1,15 +1,15 @@
 package sockets;
 
 public class UserArray<T> {
-	protected int sp; // empty stack
+	int sp; // empty stack
 	protected T[] head; // array
 	private int size;
 
-	@SuppressWarnings("unchecked")
-	 public UserArray() {
-		sp = -1;
+	 @SuppressWarnings("unchecked")
+	public UserArray() {
 	    size = 24; // sets the default size of the stack
-	    head = (T[]) new Object[size];
+	    head = (T[]) new String[size];
+	    sp = -1;
 	 }
 
 	 public boolean isFull() {
@@ -21,9 +21,13 @@ public class UserArray<T> {
 	 }
 
 	 public void push(T t) {
-		 if(!isFull())
-	       head[++sp] = t;
-		 System.out.println(t + " Created");
+		 if(!isFull()) {
+	       	 head[++sp] = t;
+	       	 System.out.println(t + " Created");
+	       	 System.out.println(sp);
+		 } else {
+			 System.out.println("Array full...");
+		 }
 	 }
 
 	 public T pop() {
