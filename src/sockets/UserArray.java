@@ -30,7 +30,7 @@ public class UserArray<T> {
 		if (isEmpty()) {
 			return null;
 	     } else
-	       return head[sp--]; // LINE 30
+	       return head[sp--];
 	 }
 	 public int size() {
 		 return head.length;

@@ -118,7 +118,7 @@ public class OpeningServer extends JFrame {
 			log(TA, "Commands list \n logusers: displays all current users logged in.\narraylist: display the userArray list\n");
 		}
 		else if(endLine.equals("arraylist")) {
-			log(TA, "" + usersArray.returnUsers() + "\n");
+			log(TA, "" + usersArray.size() + "\n");
 		}
 	}
 	
