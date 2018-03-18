@@ -15,6 +15,7 @@ import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.*;
+import java.lang.reflect.Array;
 
 //parts of this is taken from stack overflow .. read me contains credit 
 public class OpeningServer extends JFrame {
@@ -27,6 +28,7 @@ public class OpeningServer extends JFrame {
 	private JPanel panel1;
 	private final int mainPort;
 	Users users = new Users("Main", "Main");
+	UserArray<String> usersArray = new UserArray<String>();
 
 	public OpeningServer(int port) throws IOException {
 		//create server box
@@ -79,18 +81,17 @@ public class OpeningServer extends JFrame {
 	//connecting serve to client
 	public void run() throws IOException {
 	    try {
-	        log(TA, "ServerSocket created. \nListering for connections... \n");
+	        log(TA, "ServerSocket created use 'commands' for help. \nListering for connections... \n");
 	       //serverSocket = new ServerSocket(mainPort);
 	        
 	        //loop threw and create users
 	        int hold = 0;
 	        for (int i = 1; i < 2; i++) {
 	            conn = serverSocket.accept();
-	            log(TA, "User " + i + " connected on port: " + conn.getLocalPort());
+	            log(TA, "User " + i + " connected on port: " + conn.getLocalPort() + "\n");
 	            hold = i;
 	        }
 	        Users user = new Users("User" + Integer.toString(hold), Integer.toString(conn.getLocalPort()));
-	        user.logInfo();
 	    } catch (IOException ioe) {
 	        System.out.println(ioe);
 	    }
@@ -109,17 +110,16 @@ public class OpeningServer extends JFrame {
 		String endLine = TA.getText().substring(start, end);
 		if(endLine.equals("logusers")) {
 			System.out.println("Logging users");
-			ArrayList<String> us = users.returnUsers();
-			for(int k = 0; k <= us.size(); k++) {
-				if(k != -1) {
-					log(TA, "Users: " + us.get(k));	
-				}
+			for(int i = 0; i < usersArray.size(); i++) {
+				log(TA, "Users" + i + ": "  + usersArray.getHead(i) + "\n");
 			}
+	}
+		else if(endLine.equals("commands")) {
+			log(TA, "Commands list \n logusers: displays all current users logged in.\narraylist: display the userArray list\n");
 		}
-//		String[] lines = TA.getText().split("\\n");
-//		for(int i = 0; i < lines.length; i++) {
-//			if(i == lines.length && )
-//		}
+		else if(endLine.equals("arraylist")) {
+			log(TA, "" + usersArray.returnUsers() + "\n");
+		}
 	}
 	
 	//read files from client
